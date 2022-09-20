@@ -1,0 +1,38 @@
+{
+  "name": "workout_tracker",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "res:build": "yarn res:clean && rescript",
+    "res:dev": "rescript build -w",
+    "res:deps": "rescript build -with-deps",
+    "res:clean": "rescript clean"
+  },
+  "dependencies": {
+    "@rescript/react": "^0.10.3",
+    "@ryyppy/rescript-promise": "^2.1.0",
+    "react": "18.1.0",
+    "react-native": "0.70.1",
+    "rescript-js": "1.0.0-beta.2",
+    "rescript-react-native": "^0.68.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.32.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.72.1",
+    "react-test-renderer": "18.1.0",
+    "rescript": "^10.0.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
