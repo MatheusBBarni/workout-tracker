@@ -22,7 +22,8 @@
   "bs-dependencies": [
     "rescript-js",
     "@rescript/react",
+    "@ryyppy/rescript-promise",
     "rescript-react-native",
-    "@ryyppy/rescript-promise"
+    "rescript-react-navigation"
   ]
 }

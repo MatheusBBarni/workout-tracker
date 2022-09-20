@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  */
 open ReactNative
+open ReactNavigation
 
 let styles = {
   open Style
@@ -21,11 +22,10 @@ let useIsDarkMode = () => {
   ->Belt.Option.getWithDefault(false)
 }
 
-@react.component
-let app = () => {
-  let isDarkMode = useIsDarkMode()
-  <SafeAreaView>
-    <StatusBar barStyle={isDarkMode ? #lightContent : #darkContent} />
+module Home = {
+  @react.component
+  let make = (~navigation as _, ~route as _) => {
+    let isDarkMode = useIsDarkMode()
     <ScrollView
       contentInsetAdjustmentBehavior=#automatic
       style={
@@ -42,5 +42,47 @@ let app = () => {
         </Text>
       </TouchableOpacity>
     </ScrollView>
+  }
+}
+
+module Splash = {
+  @react.component
+  let make = (~navigation as _, ~route as _) => {
+    let isDarkMode = useIsDarkMode()
+    <ScrollView
+      contentInsetAdjustmentBehavior=#automatic
+      style={
+        open Style
+        viewStyle(~backgroundColor=isDarkMode ? "black" : "white", ())
+      }>
+      <TouchableOpacity onPress={_ => Js.log("rescript")}>
+        <Text
+          style={
+            open Style
+            style(~marginTop=8.->dp, ~fontSize=18., ~fontWeight=#_400, ~color="red", ())
+          }>
+          {"Splash"->React.string}
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
+  }
+}
+
+include NativeStack.Make({
+  type params = unit
+})
+
+@react.component
+let app = () => {
+  let isDarkMode = useIsDarkMode()
+
+  <SafeAreaView>
+    <StatusBar barStyle={isDarkMode ? #lightContent : #darkContent} />
+    <Native.NavigationContainer>
+      <Navigator screenOptions={_optionsProps => options(~presentation=#modal, ())}>
+        <Screen name="Splash" component=Splash.make />
+        <Screen name="Home" component=Home.make />
+      </Navigator>
+    </Native.NavigationContainer>
   </SafeAreaView>
 }
